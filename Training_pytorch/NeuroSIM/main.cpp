@@ -328,12 +328,14 @@ int main(int argc, char * argv[]) {
 		// layer-by-layer process
 		// show the detailed hardware performance for each layer
 		for (int i=0; i<netStructure.size(); i++) {
+			cout << "----------- NetStructureSize_1: " << netStructure.size() << endl;
 			cout << "-------------------- Estimation of Layer " << i+1 << " ----------------------" << endl;
 			
 			param->activityRowReadWG = atof(argv[4*i+8]);
                         param->activityRowWriteWG = atof(argv[4*i+8]);
                         param->activityColWriteWG = atof(argv[4*i+8]);
 			
+			cout << "Main_Step-1";
 			ChipCalculatePerformance(inputParameter, tech, cell, i, argv[4*i+5], argv[4*i+6], argv[4*i+7], netStructure[i][6],
 						netStructure, markNM, numTileEachLayer, utilizationEachLayer, speedUpEachLayer, tileLocaEachLayer,
 						numPENM, desiredPESizeNM, desiredTileSizeCM, desiredPESizeCM, CMTileheight, CMTilewidth, NMTileheight, NMTilewidth, numArrayWriteParallel,
@@ -343,6 +345,7 @@ int main(int argc, char * argv[]) {
 						&layerReadLatencyPeakFW, &layerReadDynamicEnergyPeakFW, &layerReadLatencyPeakAG, &layerReadDynamicEnergyPeakAG,
 						&layerReadLatencyPeakWG, &layerReadDynamicEnergyPeakWG, &layerWriteLatencyPeakWU, &layerWriteDynamicEnergyPeakWU);
 			
+			cout << "Main_Step-2";
 			double numTileOtherLayer = 0;
 			double layerLeakageEnergy = 0;		
 			for (int j=0; j<netStructure.size(); j++) {
@@ -574,7 +577,7 @@ int main(int argc, char * argv[]) {
 		chipReadLatencyPeakAG = systemClockPeakAG;
 		
 		for (int i=0; i<netStructure.size(); i++) {
-			
+			cout << "----------- NetStructureSize_2: " << netStructure.size() << endl;
 			cout << "-------------------- Estimation of Layer " << i+1 << " ----------------------" << endl;
 
 			cout << "layer" << i+1 << "'s readLatency is: " << readLatencyPerLayer[i]*1e9 << "ns" << endl;
